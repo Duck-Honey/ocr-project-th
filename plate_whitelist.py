@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-WHITELIST_PATH = Path(__file__).resolve().parent / "plate_whitelist.txt"
+WHITELIST_PATH = Path(__file__).resolve().parent / "whitelist_plates.txt"
 
 
 def _normalize(plate: str) -> str:

@@ -6,7 +6,7 @@ import json
 import urllib.error
 import urllib.request
 
-import api_keys
+import app_secrets as api_keys
 
 LINE_PUSH_API = "https://api.line.me/v2/bot/message/push"
 
