@@ -42,5 +42,10 @@ def send_push_text(message: str) -> bool:
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
             return 200 <= resp.status < 300
-    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError):
+    except urllib.error.HTTPError as e:
+        err = e.read().decode("utf-8", errors="replace")
+        print(f"LINE error {e.code}: {err}")
+        return False
+    except (urllib.error.URLError, TimeoutError) as e:
+        print(f"LINE connection error: {e}")
         return False
