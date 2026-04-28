@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whitelist + LINE Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Whitelist LINE Message API</h1>
+      <p class="muted">Modern dashboard for plate whitelist and control of <code>main.py</code>.</p>
+      <div class="row">
+        <button id="runBtn" class="btn primary">Run main.py</button>
+        <button id="stopBtn" class="btn danger">Stop main.py</button>
+        <button id="testLineBtn" class="btn">Test LINE</button>
+      </div>
+      <p id="statusText" class="status">Checking process status...</p>
+    </section>
+
+    <section class="card">
+      <h2>Plate Whitelist</h2>
+      <div class="row">
+        <input id="plateInput" type="text" placeholder="Example: กข1234">
+        <button id="addBtn" class="btn primary">Add</button>
+      </div>
+      <ul id="whitelist" class="list"></ul>
+    </section>
+
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
