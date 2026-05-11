@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 
-LINE_CHANNEL_ACCESS_TOKEN = "Dfdg93dPL5j6yKnbHsKXbSdJVZxsqDTReKOslUnv3Qk295xPxAmpQPXIL4fZUHpkdmgnbMZ86QddoufkGs94vbyJWStWvHZxcCOZPuttCLIQHqBoHXnDV/6YKQTR7Uyql7jU8irt5nytfcgAylsFbQdB04t89/1O/w1cDnyilFU="
-LINE_PUSH_TO = "U986fb0aeca4be80b25d681ddbc2d68a6"
+LINE_CHANNEL_ACCESS_TOKEN = "API Keys is here"
+LINE_PUSH_TO = "Awwww i love Femboy"
 
 
 def get_line_channel_access_token() -> str:
