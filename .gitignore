@@ -1,1 +1,5 @@
-api_keys.py
+app_secrets.py
+api_keys
+.venv/
+__pycache__/
+*.pyc

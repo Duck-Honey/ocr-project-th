@@ -3,14 +3,11 @@ import sys
 import io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-import os
-
-# Set from api_keys
-os.environ["LINE_CHANNEL_ACCESS_TOKEN"] = "ILzcTBwslUSZbQq5g2JLPo99m0kTvjYOhN2rIUhyIZDxuh9TOrX7DEF6iPB718NTdmgnbMZ86QddoufkGs94vbyJWStWvHZxcCOZPuttCLK2iPm22ZfsxS3BNEFgCouU0BoXvA+nHt96asve+klrCwdB04t89/1O/w1cDnyilFU="
-os.environ["LINE_PUSH_TO"] = "U986fb0aeca4be80b25d681ddbc2d68a6"
-
+import app_secrets as api_keys
 import line_notify
 
+print("Token:", api_keys.get_line_channel_access_token()[:20] + "...")
+print("Push to:", api_keys.get_line_push_to())
 print("LINE API ready:", line_notify.messaging_push_ready())
 
 # Test send

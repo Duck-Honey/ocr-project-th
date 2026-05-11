@@ -1,115 +1,209 @@
 :root {
-  --bg: #0b1020;
-  --card: #121933;
+  --bg: #070d1f;
+  --card: #0d1530;
   --text: #e7ecff;
-  --muted: #9ba8d6;
+  --muted: #8a98cc;
   --primary: #5b8cff;
+  --primary-dim: #3a6be0;
   --danger: #ff5d7a;
-  --border: #26315c;
+  --accent: #06d6a0;
+  --accent-dim: #04b387;
+  --border: #1e2e5a;
+  --success: #06d6a0;
+  --error: #ff5d7a;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  margin: 0;
   min-height: 100vh;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  font-size: 15px;
   color: var(--text);
-  background: radial-gradient(circle at top right, #1a2b70, var(--bg) 45%);
+  background: #070d1f;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 80% -10%, rgba(91,140,255,.18), transparent),
+    radial-gradient(ellipse 60% 40% at 10% 90%,  rgba(6,214,160,.10), transparent);
 }
 
+/* ── Layout ── */
 .container {
-  width: min(900px, 92%);
-  margin: 32px auto;
+  width: min(860px, 94%);
+  margin: 32px auto 60px;
   display: grid;
+  gap: 20px;
+}
+
+/* ── Hero / Header ── */
+.hero-card {
+  display: flex;
+  align-items: center;
   gap: 18px;
+  background: linear-gradient(135deg, rgba(91,140,255,.12), rgba(6,214,160,.07));
+  border: 1px solid rgba(91,140,255,.3);
+  border-radius: 20px;
+  padding: 22px 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
 }
+.hero-icon { font-size: 2.4rem; line-height: 1; }
+.hero-card h1 { font-size: 1.55rem; font-weight: 700; margin-bottom: 4px; }
 
+/* ── Cards ── */
 .card {
-  background: linear-gradient(165deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  background: linear-gradient(165deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  padding: 22px 24px;
+  box-shadow: 0 16px 48px rgba(0,0,0,.3);
+  transition: box-shadow .25s;
+}
+.card:hover { box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.card-icon { font-size: 1.3rem; }
+.card-header h2 { font-size: 1.1rem; font-weight: 600; }
+
+/* ── Typography ── */
+h1, h2, h3 { line-height: 1.25; }
+.muted { color: var(--muted); }
+.small { font-size: 0.88rem; margin-bottom: 18px; }
+code {
+  background: rgba(91,140,255,.15);
+  border-radius: 5px;
+  padding: 1px 5px;
+  font-size: .88em;
+  color: #a0b8ff;
 }
 
-h1, h2 {
-  margin: 0 0 10px;
-}
-
-.muted {
-  color: var(--muted);
-}
-
+/* ── Rows ── */
 .row {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin: 14px 0;
+  margin: 12px 0;
 }
 
+/* ── Inputs ── */
 input {
   flex: 1;
-  min-width: 230px;
-  background: #0b122b;
+  min-width: 200px;
+  background: rgba(7,13,31,.8);
   border: 1px solid var(--border);
   color: var(--text);
-  border-radius: 10px;
-  padding: 10px 12px;
+  border-radius: 11px;
+  padding: 11px 14px;
+  font-size: .95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
 }
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(91,140,255,.18);
+}
+input::placeholder { color: var(--muted); opacity: .7; }
 
+.field-group { margin-bottom: 14px; }
+.field-group label {
+  display: block;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.input-row input { flex: 1; }
+
+/* ── Buttons ── */
 .btn {
   border: none;
-  border-radius: 10px;
-  padding: 10px 14px;
+  border-radius: 11px;
+  padding: 11px 18px;
   color: #fff;
-  background: #2d3f7f;
+  font-family: inherit;
+  font-size: .93rem;
+  font-weight: 500;
+  background: #1e2e5a;
   cursor: pointer;
-  transition: transform 0.12s ease, opacity 0.12s ease;
+  transition: transform .12s, opacity .12s, box-shadow .15s;
+  white-space: nowrap;
 }
+.btn:hover  { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.3); }
+.btn:active { transform: translateY(0);    box-shadow: none; }
 
-.btn:hover {
-  transform: translateY(-1px);
-  opacity: 0.95;
+.btn.primary { background: var(--primary); }
+.btn.primary:hover { background: var(--primary-dim); }
+
+.btn.danger  { background: var(--danger); }
+
+.btn.accent  { background: var(--accent); color: #003; }
+.btn.accent:hover { background: var(--accent-dim); }
+
+.btn.icon-btn {
+  padding: 11px 13px;
+  background: rgba(91,140,255,.12);
+  border: 1px solid var(--border);
+  font-size: 1.05rem;
+  line-height: 1;
+  flex-shrink: 0;
 }
+.btn.icon-btn:hover { background: rgba(91,140,255,.22); }
 
-.btn.primary {
-  background: var(--primary);
-}
-
-.btn.danger {
-  background: var(--danger);
-}
-
-.status {
-  margin: 8px 0 0;
+/* ── Status badge ── */
+.badge {
+  display: inline-block;
+  border-radius: 30px;
+  padding: 5px 14px;
+  font-size: .83rem;
   font-weight: 600;
+  letter-spacing: .03em;
+  margin-top: 10px;
 }
+.badge-running { background: rgba(6,214,160,.15); color: var(--success); border: 1px solid rgba(6,214,160,.3); }
+.badge-stopped { background: rgba(255,93,122,.12); color: var(--danger);  border: 1px solid rgba(255,93,122,.25); }
 
+/* ── LINE message ── */
+.line-msg {
+  margin-top: 10px;
+  min-height: 1.4em;
+  font-size: .88rem;
+  font-weight: 500;
+  transition: opacity .3s;
+}
+.line-msg.ok  { color: var(--success); }
+.line-msg.err { color: var(--danger);  }
+
+/* ── Whitelist ── */
 .list {
   list-style: none;
-  margin: 0;
-  padding: 0;
   display: grid;
   gap: 8px;
+  margin-top: 6px;
 }
-
 .list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #0e1633;
+  background: rgba(7,13,31,.7);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 12px;
+  border-radius: 11px;
+  padding: 10px 14px;
+  animation: fadeIn .2s ease;
 }
+.list li span { font-weight: 500; letter-spacing: .02em; }
 
-.mono {
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: #0a1026;
-  padding: 10px;
-  overflow: auto;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

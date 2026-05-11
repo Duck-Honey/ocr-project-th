@@ -1,8 +1,8 @@
-"""Central place for API token/key configuration.
-
-Fill these values once, then other modules import from here.
-Environment variables still override these defaults when set.
-"""
+# DEPRECATED — This file is NOT used by the application.
+# The actual credentials file is: app_secrets.py
+# This file is kept only for reference. Please edit app_secrets.py instead.
+#
+# If you need to update LINE keys, use the web dashboard at http://127.0.0.1:5000
 
 from __future__ import annotations
 

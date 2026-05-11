@@ -6,12 +6,14 @@ import sys
 from pathlib import Path
 
 from flask import Flask, jsonify, render_template, request
+import re
 
 import line_notify
 import plate_whitelist
 
 BASE_DIR = Path(__file__).resolve().parent
 MAIN_PY = BASE_DIR / "main.py"
+API_KEYS_FILE = BASE_DIR / "app_secrets.py"
 
 app = Flask(__name__)
 main_process: subprocess.Popen[str] | None = None
@@ -100,6 +102,50 @@ def test_line():
     if ok:
         return jsonify({"ok": True, "message": "LINE test message sent"})
     return jsonify({"ok": False, "message": "Failed to send LINE message"}), 500
+
+
+@app.get("/api/line-keys")
+def get_line_keys():
+    """Return current LINE credentials from app_secrets.py."""
+    import app_secrets as ak
+    return jsonify({
+        "token": ak.LINE_CHANNEL_ACCESS_TOKEN,
+        "push_to": ak.LINE_PUSH_TO,
+    })
+
+
+@app.post("/api/line-keys")
+def save_line_keys():
+    """Overwrite LINE credentials in app_secrets.py."""
+    data = request.get_json(silent=True) or {}
+    token = str(data.get("token", "")).strip()
+    push_to = str(data.get("push_to", "")).strip()
+    if not token or not push_to:
+        return jsonify({"ok": False, "message": "Both token and push_to are required"}), 400
+
+    content = API_KEYS_FILE.read_text(encoding="utf-8")
+    content = re.sub(
+        r'^LINE_CHANNEL_ACCESS_TOKEN\s*=\s*".*?"',
+        f'LINE_CHANNEL_ACCESS_TOKEN = "{token}"',
+        content,
+        flags=re.MULTILINE,
+    )
+    content = re.sub(
+        r'^LINE_PUSH_TO\s*=\s*".*?"',
+        f'LINE_PUSH_TO = "{push_to}"',
+        content,
+        flags=re.MULTILINE,
+    )
+    API_KEYS_FILE.write_text(content, encoding="utf-8")
+
+    # Reload modules so changes take effect immediately
+    import importlib
+    import app_secrets as ak
+    importlib.reload(ak)
+    # line_notify imports app_secrets at module level — must reload it too
+    importlib.reload(line_notify)
+
+    return jsonify({"ok": True, "message": "LINE credentials saved successfully"})
 
 
 if __name__ == "__main__":

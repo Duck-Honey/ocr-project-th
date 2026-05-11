@@ -26,14 +26,25 @@ def try_open() -> serial.Serial | None:
     """เปิดพอร์ตถ้ามี ESP_PORT; ถ้าไม่ตั้งหรือเปิดไม่ได้ คืน None (ไม่ crash)"""
     port = _port()
     if not port:
-        print("Serial: ไม่ได้ตั้ง ESP_PORT — ข้ามการเชื่อม ESP8266 (ตั้งเช่น $env:ESP_PORT='COM3')")
+        import serial.tools.list_ports
+        available_ports = [p.device for p in serial.tools.list_ports.comports()]
+        print("Serial: ไม่ได้ตั้ง ESP_PORT — ข้ามการเชื่อม ESP8266")
+        if available_ports:
+            print(f"พอร์ตที่ตรวจพบ: {', '.join(available_ports)}")
+            print(f"ลองใช้คำสั่ง: $env:ESP_PORT='{available_ports[0]}'")
+        else:
+            print("ไม่พบพอร์ต COM ใด ๆ — โปรดตรวจสอบว่าเสียบ ESP8266 หรือยัง")
         return None
     try:
         ser = serial.Serial(port, _baud(), timeout=0.2)
         print(f"Serial: เชื่อม {port} @ {_baud()} baud")
         return ser
     except Exception as e:  # noqa: BLE001 — แสดงข้อความแล้วทำงานต่อได้
+        import serial.tools.list_ports
+        available_ports = [p.device for p in serial.tools.list_ports.comports()]
         print(f"Serial: เปิดพอร์ตไม่ได้ ({port}): {e}")
+        if available_ports:
+            print(f"พอร์ตที่มีในระบบ: {', '.join(available_ports)}")
         return None
 
 

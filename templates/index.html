@@ -1,29 +1,80 @@
 <!doctype html>
-<html lang="en">
+<html lang="th">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Whitelist + LINE Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
   <main class="container">
-    <section class="card">
-      <h1>Whitelist LINE Message API</h1>
-      <p class="muted">Modern dashboard for plate whitelist and control of <code>main.py</code>.</p>
-      <div class="row">
-        <button id="runBtn" class="btn primary">Run main.py</button>
-        <button id="stopBtn" class="btn danger">Stop main.py</button>
-        <button id="testLineBtn" class="btn">Test LINE</button>
+
+    <!-- ── Header ── -->
+    <header class="hero-card">
+      <div class="hero-icon">🚗</div>
+      <div>
+        <h1>Whitelist &amp; LINE Dashboard</h1>
+        <p class="muted">ควบคุม <code>main.py</code> · จัดการป้ายทะเบียน · ตั้งค่า LINE API</p>
       </div>
-      <p id="statusText" class="status">Checking process status...</p>
+    </header>
+
+    <!-- ── Process control ── -->
+    <section class="card">
+      <div class="card-header">
+        <span class="card-icon">⚙️</span>
+        <h2>Process Control</h2>
+      </div>
+      <div class="row">
+        <button id="runBtn" class="btn primary">▶ Run main.py</button>
+        <button id="stopBtn" class="btn danger">■ Stop main.py</button>
+        <button id="testLineBtn" class="btn accent">✉ Test LINE</button>
+      </div>
+      <div id="statusBadge" class="badge badge-stopped">● Checking…</div>
     </section>
 
+    <!-- ── LINE Credentials ── -->
     <section class="card">
-      <h2>Plate Whitelist</h2>
+      <div class="card-header">
+        <span class="card-icon">🔑</span>
+        <h2>LINE Credentials</h2>
+      </div>
+      <p class="muted small">แก้ไข Token และ User ID แล้วกด <strong>Save</strong> — ค่าจะถูกบันทึกลงไฟล์ <code>app_secrets.py</code> ทันที</p>
+
+      <div class="field-group">
+        <label for="tokenInput">LINE Channel Access Token</label>
+        <div class="input-row">
+          <input id="tokenInput" type="password" placeholder="ILzc…" autocomplete="off" spellcheck="false">
+          <button class="btn icon-btn" onclick="toggleVisibility('tokenInput', this)" title="Toggle visibility">👁</button>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="pushToInput">LINE Push To (User / Group ID)</label>
+        <div class="input-row">
+          <input id="pushToInput" type="password" placeholder="Uxxxxxxxx…" autocomplete="off" spellcheck="false">
+          <button class="btn icon-btn" onclick="toggleVisibility('pushToInput', this)" title="Toggle visibility">👁</button>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:16px">
+        <button id="saveLineBtn" class="btn primary">💾 Save Credentials</button>
+        <button id="reloadLineBtn" class="btn">↺ Reload from file</button>
+      </div>
+      <p id="lineMsg" class="line-msg"></p>
+    </section>
+
+    <!-- ── Plate Whitelist ── -->
+    <section class="card">
+      <div class="card-header">
+        <span class="card-icon">📋</span>
+        <h2>Plate Whitelist</h2>
+      </div>
       <div class="row">
-        <input id="plateInput" type="text" placeholder="Example: กข1234">
-        <button id="addBtn" class="btn primary">Add</button>
+        <input id="plateInput" type="text" placeholder="กข 1234">
+        <button id="addBtn" class="btn primary">+ Add</button>
       </div>
       <ul id="whitelist" class="list"></ul>
     </section>
