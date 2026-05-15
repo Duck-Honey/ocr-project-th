@@ -1,4 +1,4 @@
-# 🚗 OCR Barrier Gate — ระบบเปิด-ปิดไม้กั้นอัตโนมัติด้วย OCR
+# OCR Barrier Gate — ระบบเปิด-ปิดไม้กั้นอัตโนมัติด้วย OCR
 
 > Automatic vehicle license plate recognition system for barrier gate control  
 > ระบบอ่านทะเบียนรถอัตโนมัติเพื่อควบคุมไม้กั้นประตู
@@ -15,18 +15,18 @@ This system uses **EasyOCR** + **YOLO** to read license plates from a camera, co
 
 ## ✨ ฟีเจอร์ / Features
 
-- 📷 อ่านทะเบียนรถแบบ Real-time ผ่านกล้อง
-- 🤖 ตรวจจับป้ายทะเบียนด้วย YOLO11n
-- 🔤 OCR ด้วย EasyOCR (รองรับภาษาไทย + อังกฤษ)
-- ✅ ระบบ Whitelist ทะเบียนที่อนุญาต
-- 🔌 ควบคุม ESP8266 ผ่าน Serial (servo motor)
-- 📲 แจ้งเตือน LINE ทุกครั้งที่มีรถเข้า-ออก
-- 🖥️ Web UI สำหรับดู log และจัดการ whitelist
-- 📝 บันทึก log ทะเบียนทุกคันพร้อม timestamp
+- อ่านทะเบียนรถแบบ Real-time ผ่านกล้อง
+- ตรวจจับป้ายทะเบียนด้วย YOLO11n
+- OCR ด้วย EasyOCR (รองรับภาษาไทย + อังกฤษ)
+- ระบบ Whitelist ทะเบียนที่อนุญาต
+- ควบคุม ESP8266 ผ่าน Serial (servo motor)
+- แจ้งเตือน LINE ทุกครั้งที่มีรถเข้า-ออก
+- Web UI สำหรับดู log และจัดการ whitelist
+- บันทึก log ทะเบียนทุกคันพร้อม timestamp
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Component | Technology |
 |---|---|
@@ -40,7 +40,7 @@ This system uses **EasyOCR** + **YOLO** to read license plates from a camera, co
 
 ---
 
-## 📁 โครงสร้างไฟล์ / File Structure
+## โครงสร้างไฟล์ / File Structure
 
 ```
 ocr-project-th/
@@ -59,7 +59,7 @@ ocr-project-th/
 
 ---
 
-## 🚀 การติดตั้ง / Installation
+## การติดตั้ง / Installation
 
 ```bash
 # 1. Clone repo
@@ -82,7 +82,7 @@ pip install -r requirements.txt
 
 ---
 
-## ⚙️ การตั้งค่า / Configuration
+## การตั้งค่า / Configuration
 
 สร้างไฟล์ `api_keys.py` (ไม่ถูก commit ขึ้น git):
 
@@ -102,7 +102,7 @@ export ESP_PORT=/dev/ttyUSB0
 
 ---
 
-## 🖥️ การใช้งาน / Usage
+## การใช้งาน / Usage
 
 ```bash
 # รัน main system
@@ -116,19 +116,19 @@ Web UI จะเปิดที่ `http://localhost:5000`
 
 ---
 
-## 📲 LINE Notification
+## LINE Notification
 
 ระบบจะส่งข้อความแจ้งเตือนไปยัง LINE ทุกครั้งที่:
-- ✅ ทะเบียนอยู่ใน whitelist → เปิดไม้กั้น
-- ❌ ทะเบียนไม่อยู่ใน whitelist → ปฏิเสธ
+- ทะเบียนอยู่ใน whitelist → เปิดไม้กั้น
+- ทะเบียนไม่อยู่ใน whitelist → ปฏิเสธ
 
 ---
 
-## 📦 Requirements
+## Requirements
 
 ```
 easyocr
-ultralytics
+ultralytics. Fake
 pyserial
 flask
 opencv-python
